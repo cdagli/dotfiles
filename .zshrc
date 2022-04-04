@@ -103,4 +103,6 @@ source $ZSH/oh-my-zsh.sh
 # Uncomment the following line to disable bi-weekly auto-update checks.
 #alias logoauth="kubectl logs -f `kubectl get pods | grep oauth | cut -d' ' -f1`"
 
-if [ "$TMUX" = "" ]; then exec tmux; fi
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux
+fi
